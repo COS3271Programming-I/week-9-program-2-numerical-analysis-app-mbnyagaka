@@ -1,0 +1,54 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class NumericalAnalysisApp {
+    public static void main(String[] args) throws IOException {
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.print("Enter the name of the data file: ");
+        String filename = keyboard.nextLine();
+
+        File file = new File(filename);
+        Scanner inputFile = new Scanner(file);
+
+        int count = 0;
+        double sum = 0.0;
+        double largest = 0.0;
+        double smallest = 0.0;
+
+        if (inputFile.hasNextDouble()) {
+            double firstNum = inputFile.nextDouble();
+            largest = firstNum;
+            smallest = firstNum;
+            sum = firstNum;
+            count = 1;
+        }
+
+        while (inputFile.hasNextDouble()) {
+            double num = inputFile.nextDouble();
+            count++;
+            sum += num;
+
+            if (num > largest) {
+                largest = num;
+            }
+
+            if (num < smallest) {
+                smallest = num;
+            }
+        }
+
+        double average = sum / count;
+        double range = largest - smallest;
+
+        System.out.println("Quantity of numbers: " + count);
+        System.out.println("Average: " + average);
+        System.out.println("Largest number: " + largest);
+        System.out.println("Smallest number: " + smallest);
+        System.out.println("Range: " + range);
+
+        inputFile.close();
+        keyboard.close();
+    }
+}
